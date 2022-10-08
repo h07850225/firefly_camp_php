@@ -4,11 +4,12 @@
 
     require_once("./connect_cgd102g1-yu.php");
 
-    $sql = "select * from `area`";
+    $sql = "select mem_name, mem_nick_name, mem_email, mem_city, mem_addr, mem_phone
+    from member;";
 
-    $area = $pdo->query($sql);
+    $mem = $pdo->query($sql);
 
-    $areadata = $area->fetchAll();
+    $memdata = $mem->fetchAll(PDO::FETCH_ASSOC);
     
 
 ?>
@@ -17,7 +18,7 @@
 
     $data = [];
 
-    foreach($areadata as $i => $content){
+    foreach($memdata as $i => $content){
         $data[]=$content;
     }
     echo json_encode($data);
