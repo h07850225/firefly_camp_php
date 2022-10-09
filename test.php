@@ -2,24 +2,24 @@
     header('Access-Control-Allow-Origin:*');//跨網域，需要這段才不會被攔截
     header("Content-Type:application/json;charset=utf-8");
 
-    require_once("./connect_cgd102g1.php");
+    require_once("./connect_cgd102g1-09.php");
 
-    $sql = "select * from `member`";
+    $sql = "select * from `product`";
 
-    $member = $pdo->query($sql);
+    $product = $pdo->query($sql);
 
-    $members = $member->fetchAll();
+    $products = $product->fetchAll();
     
 
 ?>
 
 <?php
 
-    $data = [];
+    $product_data = [];
 
-    foreach($members as $i => $content){
-        $data[]=$content;
+    foreach($products as $i => $content){
+        $product_data[]=$content;
     }
-    echo json_encode($data);
+    echo json_encode($product_data);
 
 ?>
