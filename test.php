@@ -2,7 +2,7 @@
     header('Access-Control-Allow-Origin:*');//跨網域，需要這段才不會被攔截
     header("Content-Type:application/json;charset=utf-8");
 
-    require_once("./connect_cgd102g1-yu.php");
+    require_once("./connect_cgd102g1.php");
 
     $sql = "select * from `area`";
 
