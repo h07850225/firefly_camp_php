@@ -3,18 +3,15 @@ session_start();
 header("Access-Control-Allow-Origin:*");//跨網域，需要這段才不會被攔截
 header("Content-Type:application/json;charset=utf-8");
 ob_start();//output buffer start
-
-// echo $_POST['mem_id'];
-
-    try {
-        require_once("./connect_cgd102g1.php");
+try {
+    require_once("./connect_cgd102g1.php");
         
-        $sql = "select * from member where mem_id=:mem_id and mem_psw=:mem_psw"; //''
+    $sql = "select * from member where mem_id=:mem_id and mem_psw=:mem_psw"; //mem_id是欄位名稱，:mem_id是值
 
-        $member = $pdo->prepare( $sql ); //先編譯好
-        $member->bindValue(":mem_id", $_POST["mem_id"]); //代入資料
-        $member->bindValue(":mem_psw", $_POST["mem_psw"]);
-        $member->execute();//執行之
+    $member = $pdo->prepare( $sql ); //先編譯好
+    $member->bindValue(":mem_id", $_POST["account"]); //代入資料
+    $member->bindValue(":mem_psw", $_POST["password"]);
+    $member->execute();//執行之
 
         if( $member->rowCount() == 0 ){//找不到
             echo "0";
@@ -33,7 +30,7 @@ ob_start();//output buffer start
             $_SESSION["mem_status"]=$memRow["mem_status"];
             $_SESSION["mem_email"]=$memRow["mem_email"];
             $_SESSION["register_date"]=$memRow["register_date"];
-            
+            //送出登入者的資料
             $result = ["mem_no"=>$_SESSION["mem_no"],
                         "mem_id"=>$_SESSION["mem_id"],
                         "mem_name"=>$_SESSION["mem_name"],

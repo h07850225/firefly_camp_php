@@ -13,7 +13,7 @@
     $tentType = 'tentType';
 
     // 接收到的條件資料
-    $whichMonth = $_REQUEST[''];
+    $whichTentType = $_REQUEST[''];
     $howManyPeopleGet = $_REQUEST[''];
     $areaNoGet = $_REQUEST[''];
 
@@ -27,7 +27,7 @@
                 t.tent_style_people $howManyPeople,
                 t.tent_style_type $tentType
             from orders o join tent_style t on o.tent_style_no = t.tent_style_no
-            where date_format(o.checkin_date, '%Y-%m') = concat(year(now()) ,'-',$whichMonth)
+            where t.tent_style_type = $whichTentType
             and   t.area_no = $areaNoGet 
             and   t.tent_style_people = $howManyPeopleGet;";
 
